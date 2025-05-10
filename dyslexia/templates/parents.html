@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Dashboard</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="/static/dashboards/assets/img/favicon.png" rel="icon">
+  <link href="/static/dashboards/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/static/dashboards/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/dashboards/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/static/dashboards/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="/static/dashboards/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/static/dashboards/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/static/dashboards/assets/css/main.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <header id="header" class="header d-flex align-items-center">
+
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <h1>Parent's<span>Dashboard</span></h1>
+      </a>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="{{url_for('logout')}}">Log Out</a></li>
+      </nav><!-- .navbar -->
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
+    </div>
+  </header><!-- End Header -->
+  <!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="hero">
+    <div class="container position-relative">
+      <div class="row gy-5" data-aos="fade-in">
+        <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
+          <h2>Welcome <span>{{username}}</span></h2>
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2">
+          <img src="assets/img/hero-img.png" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="100">
+        </div>
+      </div>
+    </div>
+
+    <div class="icon-boxes position-relative">
+      <div class="container position-relative">
+        <div class="row gy-4 mt-5">
+
+          <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-easel"></i></div>
+              <h4 class="title"><a href="{{url_for('register_child')}}" class="stretched-link">Register A Child</a></h4>
+            </div>
+          </div><!--End Icon Box -->
+
+          <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-easel"></i></div>
+              <h4 class="title"><a href="{{url_for('display_children')}}" class="stretched-link">View Recent Screenings</a></h4>
+            </div>
+          </div><!--End Icon Box -->
+
+          <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-easel"></i></div>
+              <h4 class="title"><a href="#" id="uploadLink" class="stretched-link">Upload Image</a></h4>
+            </div>
+          </div><!--End Icon Box -->
+
+          <div class="col-xl-3 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-easel"></i></div>
+              <h4 class="title"><a href="{{url_for('whac_a_mole')}}" class="stretched-link">Real Time Screening</a></h4>
+            </div>
+          </div><!--End Icon Box -->
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Hero Section -->
+
+ <div id="uploadModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Upload Image</h2>
+      <form id="imageUploadForm" enctype="multipart/form-data">
+        <!-- Custom upload button -->
+        <label for="imageInput" class="custom-upload-button">Choose File</label>
+        <!-- Hidden file input -->
+        <input type="file" name="file" id="imageInput" accept="image/*" style="display:none;">
+        <!-- Submit button -->
+        <button type="submit">Upload</button>
+      </form>
+      <div id="uploadSuccess" style="display:none;">
+        <p>Image uploaded successfully!</p>
+        <button id="predictButton">Predict</button>
+      </div>
+    </div>
+  </div>
+  <!-- End Upload Image Modal -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="/static/dashboards/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/dashboards/assets/vendor/aos/aos.js"></script>
+  <script src="/static/dashboards/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="/static/dashboards/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="/static/dashboards/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/static/dashboards/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="/static/dashboards/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/static/dashboards/assets/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    var uploadLink = document.getElementById('uploadLink');
+    var uploadModal = document.getElementById('uploadModal');
+    var closeButton = document.getElementsByClassName('close')[0];
+    var imageUploadForm = document.getElementById('imageUploadForm');
+    var imageInput = document.getElementById('imageInput');
+    var uploadSuccess = document.getElementById('uploadSuccess');
+    var predictButton = document.getElementById('predictButton');
+
+    // When the upload link is clicked, show the upload modal
+    uploadLink.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default action of the link
+        uploadModal.style.display = 'block'; // Display the modal
+    });
+
+    // When the close button is clicked, close the modal
+    closeButton.addEventListener('click', function() {
+        uploadModal.style.display = 'none';
+    });
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.addEventListener('click', function(event) {
+        if (event.target == uploadModal) {
+            uploadModal.style.display = 'none';
+        }
+    });
+
+    // Show the file input dialog when the custom button is clicked
+    document.querySelector('.custom-upload-button').addEventListener('click', function() {
+        imageInput.click();
+    });
+
+    // Handle form submission
+    imageUploadForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+        var formData = new FormData(imageUploadForm); // Create a FormData object from the form
+        // Perform AJAX file upload
+        fetch('/upload_image', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                uploadSuccess.style.display = 'block'; // Show the success message and predict button
+            } else {
+                alert('Error: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error uploading image:', error);
+            alert('Error uploading image');
+        });
+    });
+
+    // Handle the prediction button click
+    predictButton.addEventListener('click', function() {
+        fetch('/process-image', {
+            method: 'POST'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.redirect) {
+                window.location.href = data.redirect;
+            } else {
+                alert('Error: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+});
+
+  </script>
+</body>
+
+</html>

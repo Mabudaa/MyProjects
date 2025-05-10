@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="utf-8">
+	    <title>Child Registration</title>
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <link rel="stylesheet" href="/static/child_form/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+
+	    <!-- STYLE CSS -->
+	    <link rel="stylesheet" href="/static/child_form/css/style.css">
+	</head>
+
+	<body>
+
+	    <div class="wrapper">
+	        <div class="inner">
+	            <div class="image-holder">
+	                <img src="/static/child_form/images/registration-form-1.jpg" alt="">
+	            </div>
+	            <form action="{{ url_for('register_child') }}" method="POST">
+	                <h3>Child Registration</h3>
+	                <div class="form-group">
+	                    <input type="text" name="child_name" placeholder="Child's Name" class="form-control" required>
+	                </div>
+	                <div class="form-group">
+	                    <input type="number" name="child_age" placeholder="Child's Age" class="form-control" required>
+	                </div>
+	                <div class="form-group">
+	                    <select name="child_gender" class="form-control" required>
+	                        <option value="" disabled selected>Child's Gender</option>
+	                        <option value="male">Male</option>
+	                        <option value="female">Female</option>
+	                        <option value="other">Other</option>
+	                    </select>
+	                </div>
+	                <div class="form-group">
+	                    <input type="text" name="parent_id" placeholder="User's Username" class="form-control" required>
+	                </div>
+	                <button type="submit">Register <i class="zmdi zmdi-arrow-right"></i></button>
+	            </form>
+	        </div>
+	    </div>
+	    
+	</body>
+</html>

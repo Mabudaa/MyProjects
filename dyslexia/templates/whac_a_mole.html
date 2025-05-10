@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whac a Mole</title>
+    <link rel="stylesheet" href="/static/whac_a_mole/mole.css">
+    <script src="/static/whac_a_mole/mole.js"></script>
+</head>
+<body>
+    <h1>Whac a Mole</h1>
+    <h2 id="score">0</h2>
+    <!-- 3x3 -->
+    <div id="board">
+    </div>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <p>To continue playing, press the button below:</p>
+            <a href="{{ url_for('game_play') }}">Continue</a>
+        </div>
+    </div>
+</body>
+</html>

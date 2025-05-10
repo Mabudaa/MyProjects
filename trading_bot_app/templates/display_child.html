@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Children and Screenings</title>
+</head>
+<body>
+    <h2>Children and Their Recent Screenings</h2>
+    <ul>
+        {% for child in children %}
+            <li>{{ child.name }}</li>
+            <table border="1">
+                <tr>
+                    <th>Method</th>
+                    <th>Result</th>
+                    <th>Timestamp</th>
+                    <th>Time Play</th>
+                    <th>Hits</th>
+                    <th>Misses</th>
+                    <th>Score</th> 
+
+                </tr>
+                {% for record in child.dyslexia_records %}
+                <tr>
+                    <td>{{ record.method }}</td>
+                    <td>{{ record.result }}</td>
+                    <td>{{ record.timestamp }}</td>
+                    <td>{{ record.game_time_played}}</td>
+                    <td>{{ record.game_hits}}</td>
+                    <td>{{ record.game_misses}}</td>
+                    <td>{{ record.game_score}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% endfor %}
+    </ul>
+</body>
+</html>

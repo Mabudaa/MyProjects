@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <link href="/static/dashboards/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/dashboards/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/static/dashboards/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="/static/dashboards/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/static/dashboards/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/static/dashboards/assets/css/main.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Dyslexia Detection Results</h1>
+        <div class="card mt-3">
+            <div class="card-body">
+                {% for result in results %}
+                    <h3 class="card-title">{{ result.filename }}</h3>
+                    <p class="card-text">{{ result.result }}</p>
+                {% endfor %}
+                <a href="{{ url_for('upload_image') }}" class="btn btn-primary">Upload Another Image</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

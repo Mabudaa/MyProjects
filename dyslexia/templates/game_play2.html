@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Game Play</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0, shrink-to-fit=yes">
+    
+    
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="/static/game_play/fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="/static/game_play/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/game_play/css/jquery-ui.css">
+    <link rel="stylesheet" href="/static/game_play/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/static/game_play/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/static/game_play/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/static/game_play/css/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/static/game_play/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/static/game_play/fonts/flaticon/font/flaticon.css">
+    <link rel="stylesheet" href="/static/game_play/css/aos.css">
+    <link rel="stylesheet" href="/static/game_play/css/style.css">
+    
+  </head>
+  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+  
+  <div class="site-wrap">
+
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+   
+    
+    <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
+      
+      <div class="container-fluid">
+        <div class="d-flex align-items-center">
+          <div class="site-logo"><a href="index.html">Time Remaining: </a></div>
+          <div class="ml-auto">
+            <nav class="site-navigation position-relative text-right" role="navigation">
+              <ul class="site-menu main-menu site-menu-dark js-clone-nav mr-auto d-none d-lg-block">
+                <li class="cta"><a href="" class="nav-link"><span class="rounded border border-primary">Quit</span></a></li>
+                <li class="cta"><a href="game_play3.html" class="nav-link"><span class="rounded border border-primary">Next</span></a></li>
+              </ul>
+            </nav>
+            <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right"><span class="icon-menu h3"></span></a>
+          </div>
+        </div>
+      </div>
+      
+    </header>
+
+    <div class="intro-section" id="home-section">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-4 mr-auto" data-aos="fade-up">
+            <h1>Magic Medicine</h1>
+            <p class="mb-5">Hello, Doctor! Lets help our patient feel better with a special prescription. Write dowb the above Prescription on this paper, just like a wizard's spell! Then, take a picture by pressing the word capture, so that our patient can see the special instructions. We're are like superheroes givimg them a secret potion to feel better in no time! Keep spreading smiles Doctor!!!</p>
+            <button onclick="takePhoto()" class="btn btn-outline-light py-3 px-5">Capture</button>
+        <script>
+          function takePhoto(){
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
+              navigator.mediaDevices.getUserMedia({video: true})
+              .then(function(stream){
+                var video = document.createElement('video');
+                video.srcObject = stream;
+                video.play();
+                document.body.appendChild(video);
+
+                var canvas = document.createElement('canvas');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                var context = canvas.getContext('2D');
+
+                var captureButton = document.createElement('button');
+                captureButton.textContent = 'Capture';
+                captureButton.onclick = function(){
+                  context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                  var imgData = canvas.toDataURL('photo/png');
+                  var img = document.createElement('img');
+                  img.src = imgData;
+                  document.body.appendChild(img);
+
+                  stream.getTracks().forEach(function(track){
+                    track.stop();
+
+                  });
+                  video.remove();
+                  canvas.remove();
+                  captureButton.remove();
+
+                };
+                document.boby.appendChild(captureButton);
+
+              })
+              .catch(function(error){
+                console.error('Error accessing camera', error);
+
+              });
+
+            }else{
+              console.error('gtUserMedia is not supported in this Browser');
+            }
+          }
+        </script>
+
+          </div>
+          <div class="col-lg-2 ml-auto"  data-aos="fade-up" data-aos-delay="100">
+            <figure class="img-absolute">
+              <img src="/static/game_play/images/poster_02.png" alt="Image" class="img-fluid">
+            </figure>
+          </div>
+        </div>
+          
+      </div>
+    </div>
+    </footer>
+
+  
+    
+  </div> <!-- .site-wrap -->
+
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="js/jquery-ui.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.stellar.min.js"></script>
+  <script src="js/jquery.countdown.min.js"></script>
+  <script src="js/bootstrap-datepicker.min.js"></script>
+  <script src="js/jquery.easing.1.3.js"></script>
+  <script src="js/aos.js"></script>
+  <script src="js/jquery.fancybox.min.js"></script>
+  <script src="js/jquery.sticky.js"></script>
+
+  
+  <script src="js/main.js"></script>
+    
+  </body>
+</html>

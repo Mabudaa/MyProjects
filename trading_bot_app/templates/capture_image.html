@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Capture Image</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        #btn {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #5a5af3;
+            color: #fff;
+            border-radius: 10px;
+            border-color: #fff;
+            margin-left: 45%;
+        }
+
+        .camera-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 90%;
+            position: relative; /* Added */
+        }
+
+        #camera-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .capture-button {
+            position: absolute;
+            bottom: 20px;
+            background-color: transparent;
+            color: white;
+            border: none;
+            font-size: 18px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .capture-button:hover {
+            background-color: rgba(255, 255, 255, 0.3); /* Semi-transparent white */
+        }
+
+        /* Style for the captured image page */
+        .captured-image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5; /* Light gray */
+        }
+
+        .captured-image {
+            max-width: 80%;
+            max-height: 80%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
+        }
+    </style>
+    <script>
+        var imgData; // Declare imgData globally
+
+        function takePhoto() {
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(function(stream) {
+                        var video = document.createElement('video');
+                        video.srcObject = stream;
+                        video.play();
+                        document.getElementById('camera-container').appendChild(video);
+
+                        var canvas = document.createElement('canvas');
+                        canvas.width = video.videoWidth;
+                        canvas.height = video.videoHeight;
+                        var context = canvas.getContext('2d'); // Fix the context
+
+                        var captureButton = document.createElement('button');
+                        captureButton.textContent = 'Capture';
+                        captureButton.className = 'capture-button';
+                        captureButton.onclick = function() {
+                            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                            imgData = canvas.toDataURL('image/png');
+                            var img = document.createElement('img');
+                            img.src = imgData;
+                            document.body.appendChild(img);
+
+                            stream.getTracks().forEach(function(track) {
+                                track.stop();
+                            });
+                            video.remove();
+                            canvas.remove();
+                            captureButton.remove();
+
+                            // Send captured image data to server for saving
+                            saveImage(imgData);
+                        };
+                        document.getElementById('camera-container').appendChild(captureButton);
+                    })
+                    .catch(function(error) {
+                        console.error('Error accessing camera', error);
+                    });
+
+            } else {
+                console.error('getUserMedia is not supported in this Browser');
+            }
+        }
+
+        function saveImage(imgData) {
+            fetch('/save_image', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ imageData: imgData })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Image saved successfully');
+                    } else {
+                        console.error('Failed to save image');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error saving image:', error);
+                });
+        }
+    </script>
+
+</head>
+<body>
+    <div id="camera-container" class="camera-container">
+        <!-- Capture button will be appended here -->
+    </div>
+    <button id="btn" onclick="takePhoto()">Take Photo</button>
+</body>
+</html>
