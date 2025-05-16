@@ -31,7 +31,7 @@ The Flask API and the trading bot both run in the same Python process using the 
 ![Positions Opened By Bot](./assets/screenshots/trades_opened_by_the_bot.png)
 
 ### Simulation Equity Curve
-![Equity Curve](./assets/screenshots/sismple_equity_curve.png)
+![Equity Curve](./assets/screenshots/simple_equity_curve.png)
 
 ### Model Training and Accuracy
 ![Model Accuracy](./assets/screenshots/model_accuracy.png)
