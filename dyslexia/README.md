@@ -55,7 +55,7 @@ The application backend is built with Flask. Both the dyslexia prediction logic 
 ![Camera Capture](./assets/screenshots/cameracapture.png)
 
 ### Dignosis Results
-![Dignosis Results](./assets/screenshots/dignosisresults.png)
+![Dignosis Results](./assets/screenshots/diagnosisresults.png)
 > This is what the results page would look like after a successfull dignoise had the model been available.
 ---
 ## Disclaimer
