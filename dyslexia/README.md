@@ -28,10 +28,10 @@ The application backend is built with Flask. Both the dyslexia prediction logic 
 
 ## Screenshots
 ### Land Page
-![Home]((./assets/screenshots/home.png))
+![Home](./assets/screenshots/home.png)
 
 ###  Login
-![Log In]
+![Log In](./assets/screenshots/login.png)
 
 ### Sign Up
 ![Sign Up](./assets/screenshots/signup.png)
