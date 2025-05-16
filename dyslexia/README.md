@@ -40,7 +40,7 @@ The application backend is built with Flask. Both the dyslexia prediction logic 
 ![USer Dashboard](./assets/screenshots/userdashboard.png)
 
 ### Child Registration
-![Child Registration](./assets/screenshots/childregistraion.png)
+![Child Registration](./assets/screenshots/childregistration.png)
 
 ### Whac A Mole
 ![Whac A Mole](./assets/screenshots/whac-a-mole.png)
